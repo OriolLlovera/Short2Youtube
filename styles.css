@@ -1,0 +1,213 @@
+/* CSS */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2&family=Calligraffitti&display=swap'); /* Fuente h1 */
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Para asegurar que la imagen de fondo cubra toda la página */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Añadir posición relativa al cuerpo */
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(238,174,202);
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(165,148,233,1) 98%);   
+    background-size: cover;
+    background-position: center;
+
+    
+    z-index: -1; /* Asegurar que la capa esté detrás del contenido */
+}
+
+
+#contenedor {
+    background-color: rgba(255, 255, 255, 0.15); /* Color de fondo con transparencia */
+    backdrop-filter: blur(10px); /* Efecto de desenfoque */
+    border-radius: 20px; /* Bordes redondeados */
+    padding: 20px;
+    max-width: 400px; /* Ancho máximo */
+    width: 80%; /* Ancho relativo para que sea responsive */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* Sombra */
+    text-align: center;
+}
+
+/* Estilos para los inputs y botones */
+input[type="text"], button {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.7);
+    outline: none;
+}
+
+input[type="text"] {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.7);
+    outline: none;
+    max-width: 300px; /* Ancho máximo para el input */
+    width: 100%; /* Anchura relativa */
+}
+
+
+
+/* Estilos para los botones */
+button {
+    margin-top: 10px;
+    padding: 10px 15px; /* Ajustar el relleno para adaptarse al texto */
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.15); /* Color de fondo transparente */
+    outline: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    font-family: Impact, 'Anton', Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    letter-spacing: 0.08em;
+
+}
+
+/* Estilos adicionales para el segundo y tercer botón */
+button:not(:first-child) {
+    margin-left: 10px; /* Espacio entre los botones */
+}
+
+/* Estilos alerta mensaje */
+.alert {
+    position: absolute;
+    bottom: -50px; /* Empiezan ocultos por debajo del contenedor */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 300px;
+    width: 80%;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    transition: bottom 0.5s ease; /* Añadir transición para suavizar la aparición */
+    font-family: Impact, 'Anton', Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.alert.success {
+    background-color: rgba(40, 167, 69, 0.8); /* Color de fondo para alerta de éxito */
+}
+
+.alert.error {
+    background-color: rgba(220, 53, 69, 0.8); /* Color de fondo para alerta de error */
+}
+/* Estilos miniatura */
+
+#miniatura {
+    display: none; /* Ocultar la miniatura de la imagen al cargar la página */
+    margin: 20px auto 0; /* Centrar la imagen horizontalmente y agregar espacio en la parte superior */
+    border-radius: 10px; /* Aplicar bordes redondeados */
+}
+
+/* Estilo para el botón de copiar URL cuando está desactivado */
+button#copiar:disabled {
+    opacity: 0.5; /* Reducir la opacidad del botón */
+    cursor: not-allowed; /* Cambiar el cursor a 'no permitido' */
+}
+
+/* Estilo para el h1 */
+.main {    
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrapper {
+    font-size: 7vh; /* Tamaño de la fuente en relación con la altura de la ventana */
+    height: 2em;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    mix-blend-mode: screen;
+    
+    &.invert {
+        span {
+            color: black;
+            
+            &::before {
+                -webkit-text-stroke: .1em var(--color);
+            }
+        }
+    }
+    
+    span {
+        --color: #ffba11;
+        font-family: Impact, 'Anton', Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-weight: 700;
+        font-style: italic;
+        display: block;
+        position: absolute;
+        color: var(--color);
+        letter-spacing: -.005em;
+
+        &::before, &::after {
+            content: attr(data-text);
+            display: block;
+            position: relative;
+            padding: 0 .1em;
+            z-index: 1;
+        }
+
+        &::before {
+            position: absolute;
+            -webkit-text-stroke: .1em black;
+            z-index: 0;
+        }
+
+        &:first-child {
+            transform: translate(-.255em, -.25em);
+        }
+
+        &:last-child {
+            --color: #b6acff;
+            transform: translate(.255em, .25em);
+        }
+    }
+}
+/* Estilo de la etiqueta */
+
+label{
+    font-family: Impact, 'Anton', Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+/* Estilo del placeholder */
+#url::placeholder {
+    font-family: Impact, 'Anton', Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+/* Media query para dispositivos con pantallas pequeñas */
+@media only screen and (max-width: 768px) {
+    input[type="text"] {
+        max-width: 200px; /* Reducir el ancho máximo en pantallas pequeñas */
+    }
+}
+
+/* Media query para pantallas similares al Samsung Galaxy Fold */
+@media only screen and (max-width: 280px) {
+    input[type="text"] {
+        max-width: 200px; /* Reducir el ancho máximo en pantallas muy pequeñas, como el Galaxy Fold */
+    }
+}
