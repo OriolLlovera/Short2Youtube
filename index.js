@@ -10,14 +10,15 @@ window.onload = function() {
 document.addEventListener("DOMContentLoaded", function() {
     // Función para validar la URL
     function validarURL(url) {
-        if (url === "") {
-            return "vacia";
-        }
-        if (!/^https:\/\/www\.youtube\.com\/shorts\/[a-zA-Z0-9_-]{11}$/.test(url)) {
-            return "incorrecta";
-        }
-        return "short";
+    if (url === "") {
+        return "vacia";
     }
+    if (!/^https?:\/\/(?:www\.)?youtube\.com\/shorts\/[a-zA-Z0-9_-]{11}(\?si=.*)?$/.test(url)) {
+        return "incorrecta";
+    }
+    return "short";
+}
+
 
     // Función para mostrar la alerta
     function mostrarAlerta(mensaje, tipo) {
@@ -67,20 +68,25 @@ function validarYMostrar() {
 
      // Función para mostrar la miniatura del video
      function mostrarMiniatura(url) {
-        // Eliminar la miniatura anterior si existe
-        var miniaturaImg = document.getElementById("miniatura");
-        if (miniaturaImg.src !== "") {
-            miniaturaImg.src = "";
-        }
-
-        // Extraer el ID del video de la URL
-        var idVideo = url.match(/youtube\.com\/(?:shorts\/|watch\?v=)([^\s/]+)/)[1];
-        // Construir la URL de la miniatura del video
-        var urlMiniatura = "https://img.youtube.com/vi/" + idVideo + "/maxresdefault.jpg";
-        // Mostrar la miniatura del video en la página
-        miniaturaImg.src = urlMiniatura;
-        miniaturaImg.style.display = "block"; // Mostrar la imagen
+    // Eliminar la miniatura anterior si existe
+    var miniaturaImg = document.getElementById("miniatura");
+    if (miniaturaImg.src !== "") {
+        miniaturaImg.src = "";
     }
+
+    // Extraer el ID del video de la URL
+    var match = url.match(/youtube\.com\/(?:shorts\/|watch\?v=)([^\s/?]+)/);
+    if (!match) {
+        return; // Si no se encuentra un ID válido, salir de la función
+    }
+    var idVideo = match[1];
+    // Construir la URL de la miniatura del video
+    var urlMiniatura = "https://img.youtube.com/vi/" + idVideo + "/maxresdefault.jpg";
+    // Mostrar la miniatura del video en la página
+    miniaturaImg.src = urlMiniatura;
+    miniaturaImg.style.display = "block"; // Mostrar la imagen
+}
+
 
       // Función para convertir la URL
     function convertirURL(url) {
